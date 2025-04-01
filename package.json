@@ -1,0 +1,15 @@
+{
+  "name": "mars_rover",
+  "version": "1.0.0",
+  "description": "mars rover tdd",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^29.7.0",
+    "mars_rover": "file:"
+  }
+}
