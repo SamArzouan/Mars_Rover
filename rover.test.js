@@ -1,16 +1,18 @@
 // rover.test.js
 
-const { Rover, Position } = require('./rover.js');
+const { Rover, Position, Grid } = require('./rover.js');
 
 describe('Rover', () => {
-    const createRover = (initialDirection) => new Rover(new Position(0, 0), initialDirection);
+    const position = new Position(0, 0);
+    const grid = new Grid(5, 5);
+    const createRover = (initialDirection) => new Rover(position, initialDirection, grid);
     describe('move', () => {
         it.each`
       initialDirection | expectedPosition
       ${'N'}           | ${{ x: 0, y: 1 }}
-      ${'S'}           | ${{ x: 0, y: -1 }}
+      ${'S'}           | ${{ x: 0, y: 0 }}
       ${'E'}           | ${{ x: 1, y: 0 }}
-      ${'W'}           | ${{ x: -1, y: 0 }}
+      ${'W'}           | ${{ x: 0, y: 0 }}
     `('should move in the correct direction', ({ initialDirection, expectedPosition }) => {
             const rover = createRover(initialDirection);
             rover.move();
@@ -21,9 +23,9 @@ describe('Rover', () => {
     describe('moveBackward', () => {
         it.each`
       initialDirection | expectedPosition
-      ${'N'}           | ${{ x: 0, y: -1 }}
+      ${'N'}           | ${{ x: 0, y: 0 }}
       ${'S'}           | ${{ x: 0, y: 1 }}
-      ${'E'}           | ${{ x: -1, y: 0 }}
+      ${'E'}           | ${{ x: 0, y: 0 }}
       ${'W'}           | ${{ x: 1, y: 0 }}
     `('should move backward in the correct direction', ({ initialDirection, expectedPosition }) => {
             const rover = createRover(initialDirection);
@@ -59,4 +61,17 @@ describe('Rover', () => {
             expect(rover.direction).toBe(expectedDirection);
         });
     });
+
+    describe('BoundariesGrid', () => {
+      it('should not move beyond the boundary', ()=> {
+        const rover = new Rover(new Position(0, 0), 'E', grid);
+        // Déplacement 6 fois vers l'est (au-delà de la grille)
+        for (let i = 0; i < 6; i++) {
+            rover.move();
+        }
+
+        // Vérifier que le rover est resté à la limite
+        expect(rover.position).toEqual({ x: 5, y: 0 });
+      })
+    })
 });
