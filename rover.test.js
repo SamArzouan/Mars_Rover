@@ -63,15 +63,28 @@ describe('Rover', () => {
     });
 
     describe('BoundariesGrid', () => {
-      it('should not move beyond the boundary', ()=> {
-        const rover = new Rover(new Position(0, 0), 'E', grid);
-        // Déplacement 6 fois vers l'est (au-delà de la grille)
-        for (let i = 0; i < 6; i++) {
-            rover.move();
-        }
+      it.each`
+        initialPosition | initialDirection | moveCount |expectedPosition
+        ${{ x: 0, y: 0 }}       | ${'N'}           | ${6}      | ${{ x: 0, y: 5 }}
+        ${{ x: 0, y: 0 }}       | ${'S'}           | ${6}      | ${{ x: 0, y: 0 }}
+        ${{ x: 0, y: 0 }}       | ${'E'}           | ${6}      | ${{ x: 5, y: 0 }}
+        ${{ x: 0, y: 0 }}       | ${'W'}           | ${6}      | ${{ x: 0, y: 0 }}
+      `('should not move beyond the grid boundaries', ({ initialPosition, initialDirection, moveCount, expectedPosition }) => {
+          const rover = new Rover(new Position(initialPosition.x, initialPosition.y), initialDirection, grid);
+          for (let i = 0; i < moveCount; i++) {
+              rover.move();
+          }
+          expect(rover.position).toEqual(expectedPosition);
+      });
+      // it('should not move beyond the boundary', ()=> {
+      //   const rover = new Rover(new Position(0, 0), 'E', grid);
+      //   // Déplacement 6 fois vers l'est (au-delà de la grille)
+      //   for (let i = 0; i < 6; i++) {
+      //       rover.move();
+      //   }
 
-        // Vérifier que le rover est resté à la limite
-        expect(rover.position).toEqual({ x: 5, y: 0 });
-      })
+      //   // Vérifier que le rover est resté à la limite
+      //   expect(rover.position).toEqual({ x: 5, y: 0 });
+      // })
     })
 });
