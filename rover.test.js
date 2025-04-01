@@ -76,15 +76,5 @@ describe('Rover', () => {
           }
           expect(rover.position).toEqual(expectedPosition);
       });
-      // it('should not move beyond the boundary', ()=> {
-      //   const rover = new Rover(new Position(0, 0), 'E', grid);
-      //   // Déplacement 6 fois vers l'est (au-delà de la grille)
-      //   for (let i = 0; i < 6; i++) {
-      //       rover.move();
-      //   }
-
-      //   // Vérifier que le rover est resté à la limite
-      //   expect(rover.position).toEqual({ x: 5, y: 0 });
-      // })
     })
 });
