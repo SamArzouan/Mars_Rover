@@ -9,7 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "jest": "^29.7.0",
     "mars_rover": "file:"
+  },
+  "devDependencies": {
+    "jest": "^30.0.0"
   }
 }
