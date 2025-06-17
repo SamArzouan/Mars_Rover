@@ -1,1 +1,12 @@
-<p>rover-control works!</p>
+<div class="control-container">
+    <mat-form-field>
+        <input matInput [(ngModel)]="command" placeholder="Commande (ex: LMRM)">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="sendCommand()">
+        Envoyer
+    </button>
+
+    <div *ngIf="position">
+        <p>position: ({{position.x}}, {{position.y}} - {{position.direction}})</p>
+    </div>
+</div>

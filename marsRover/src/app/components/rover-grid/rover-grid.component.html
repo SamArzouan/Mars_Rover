@@ -1,1 +1,7 @@
-<p>rover-grid works!</p>
+<div class="grid">
+    <div *ngFor="let row of [].constructor(gridSize); let y = index" class="row">
+        <div *ngFor="let col of [].constructor(gridSize); let x = index" class="cell"
+            [ngClass]="{'rover': isRoverAt(x, gridSize - 1 - y)}">
+        </div>
+    </div>
+</div>
