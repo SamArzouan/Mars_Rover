@@ -1,7 +1,7 @@
 <div class="grid">
-    <div *ngFor="let row of [].constructor(gridSize); let y = index" class="row">
-        <div *ngFor="let col of [].constructor(gridSize); let x = index" class="cell"
-            [ngClass]="{'rover': isRoverAt(x, gridSize - 1 - y)}">
+    <div *ngFor="let y of rows" class="row">
+        <div *ngFor="let x of cols" class="cell">
+            {{ isRoverAt(x, y) || '.' }}
         </div>
     </div>
 </div>

@@ -1,6 +1,6 @@
 <div class="control-container">
     <mat-form-field>
-        <input matInput [(ngModel)]="command" placeholder="Commande (ex: LMRM)">
+        <input matInput [(ngModel)]="command" placeholder="Commande (MBLR)" pattern="[MLBRmlrb]+" maxlength="10" required/>
     </mat-form-field>
     <button mat-raised-button color="primary" (click)="sendCommand()">
         Envoyer
@@ -10,3 +10,5 @@
         <p>position: ({{position.x}}, {{position.y}} - {{position.direction}})</p>
     </div>
 </div>
+
+<app-rover-grid [position]="position"></app-rover-grid>

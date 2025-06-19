@@ -14,8 +14,29 @@ export class RoverGridComponent {
   @Input() position: RoverPosition | null = null;
   @Input() gridSize: number = 5;
 
-  isRoverAt(x: number, y: number): boolean {
-    if (!this.position) return false;
-    return this.position.x === x && this.position.y === y;
+  isRoverAt(x: number, y: number): string {
+    if (!this.position) return '';
+    if (this.position.x === x && this.position.y === y) {
+      return this.getDirectionSymbol();
+    }
+    return '';
+  }
+  getDirectionSymbol(): string {
+    switch (this.position?.direction) {
+      case 'N': return '⬆️';
+      case 'E': return '➡️';
+      case 'S': return '⬇️';
+      case 'W': return '⬅️';
+      default: return '🛰️';
+    }
+  }
+
+  get rows() {
+    return Array.from({ length: this.gridSize }, (_, i) => i);
+  }
+  
+
+  get cols() {
+    return Array.from({ length: this.gridSize }, (_, i) => i);
   }
 }
